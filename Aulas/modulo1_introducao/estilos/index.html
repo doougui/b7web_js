@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<title>Curso de JavaScript</title>
+	<style>
+		h1 {
+			padding: 10px 0px;
+			color: #576574;
+			font-family: 'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif;
+			text-align: center;
+			border: 3px dashed #576574;
+		}
+		#telefone {
+			display: none;
+			font-size: 23px;
+			font-family: 'Big Caslon', 'Book Antiqua', 'Palatino Linotype', Georgia, serif;
+			text-align: center;
+		}
+		.azul {
+			background-color: #0abde3;
+			border-color: white;
+			color: white;
+		}
+		.vermelho {
+			background-color: #ee5253;
+			border-color: white;
+			color: white;
+		}
+		.verde {
+			background-color: #10ac84;
+			border-color: white;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<h1 id="titulo">Seja bem vindo(a)</h1>
+
+	<button id="azul" onclick="azul()">Azul</button>
+	<button id="vermelho" onclick="vermelho()">Vermelho</button>
+	<button id="verde" onclick="verde()">Verde</button>
+
+	<hr>
+
+	<div id="telefone">+55 (48) 99975-1669</div>
+
+	<button id="telefone-btn" onclick="mostrarTelefone(this)">Mostrar Telefone</button>
+
+	<script src="script.js"></script>
+</body>
+</html>

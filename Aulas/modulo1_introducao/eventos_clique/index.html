@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<meta charset="UTF-8">
+	<title>Curso de JavaScript</title>
+</head>
+<body>
+	<h1 
+	id="titulo" 
+	onmouseover="console.log('Passou o mouse')" 
+	onmouseout="console.log('Tirou o mouse')">
+		Seja bem vindo(a)
+	</h1>
+
+	<input type="text" id="campo" name="usuario" value="Nome do Usuário">
+
+	<button onclick="clicou()">Clique em mim</button>
+	<button onclick="document.getElementById('titulo').innerHTML = 'Texto 2!';">Próximo título</button>
+	<button onclick="this.innerHTML = 'Clicou'">Alterar este texto</button>
+
+	<script src="script.js"></script>
+</body>
+</html>
