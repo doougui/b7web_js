@@ -51,7 +51,7 @@ function openModal(e) {
 
 function closeModal() {
 	c('.pizzaWindowArea').style.opacity = 0;
-	setTimeout(() => {
+	setTimeout(_ => {
 		c('.pizzaWindowArea').style.display = 'none';
 	}, 150);
 }
@@ -60,14 +60,14 @@ cs('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach(item => {
 	item.addEventListener('click', closeModal);
 });
 
-c('.pizzaInfo--qtmenos').addEventListener('click', () => {
+c('.pizzaInfo--qtmenos').addEventListener('click', _ => {
 	if (modalQt > 1) {
 		modalQt--;
 		c('.pizzaInfo--qt').innerHTML = modalQt;
 	}
 });
 
-c('.pizzaInfo--qtmais').addEventListener('click', () => {
+c('.pizzaInfo--qtmais').addEventListener('click', _ => {
 	modalQt++;
 	c('.pizzaInfo--qt').innerHTML = modalQt;
 });
@@ -80,7 +80,7 @@ cs('.pizzaInfo--size').forEach((size, sizeIndex) => {
 	});
 });
 
-c('.pizzaInfo--addButton').addEventListener('click', () => {
+c('.pizzaInfo--addButton').addEventListener('click', _ => {
 	let size = parseInt(c('.pizzaInfo--size.selected').getAttribute('data-key'));
 	let identifier = `${pizzaJson[modalKey].id}@${size}`;
 	let key = cart.findIndex(item => item.identifier == identifier);
@@ -100,7 +100,19 @@ c('.pizzaInfo--addButton').addEventListener('click', () => {
 	closeModal();
 });
 
+c('.menu-openner').addEventListener('click', _ => {
+	if (cart.length > 0) {
+		c('aside').style.left = '0';
+	} 
+});
+
+c('.menu-closer').addEventListener('click', _ => {
+	c('aside').style.left = '100vw';
+});
+
 function updateCart() {
+	c('.menu-openner span').innerHTML = cart.length;
+
 	if (cart.length > 0) {
 		c('aside').classList.add('show');
 		c('.cart').innerHTML = '';
@@ -135,7 +147,7 @@ function updateCart() {
 			cartItem.querySelector('.cart--item-nome').innerHTML = pizzaName;
 			cartItem.querySelector('.cart--item--qt').innerHTML = cart[i].qt;
 
-			cartItem.querySelector('.cart--item-qtmenos').addEventListener('click', () => {
+			cartItem.querySelector('.cart--item-qtmenos').addEventListener('click', _ => {
 				if (cart[i].qt > 1) {
 					cart[i].qt--;
 				} else {
@@ -145,7 +157,7 @@ function updateCart() {
 				updateCart();
 			});
 
-			cartItem.querySelector('.cart--item-qtmais').addEventListener('click', () => {
+			cartItem.querySelector('.cart--item-qtmais').addEventListener('click', _ => {
 				cart[i].qt++;
 				updateCart();
 			});
@@ -161,5 +173,6 @@ function updateCart() {
 		c('.total span:last-child').innerHTML = `R$ ${total.toFixed(2).replace('.', ',')}`;
 	} else {
 		c('aside').classList.remove('show');
+		c('aside').style.left = '100vw';
 	}
 }
