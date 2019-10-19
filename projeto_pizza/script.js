@@ -1,4 +1,6 @@
-let modalQt;
+let cart = [];
+let modalQt = 1;
+let modalKey;
 
 const c = (el) => document.querySelector(el);
 const cs = (el) => document.querySelectorAll(el);
@@ -23,6 +25,7 @@ function openModal(e) {
 	e.preventDefault();
 	let key = e.target.closest('.pizza-item').getAttribute('data-key');
 	modalQt = 1;
+	modalKey = key;
 
 	c('.pizzaBig img').src = pizzaJson[key].img
 	c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
@@ -75,4 +78,24 @@ cs('.pizzaInfo--size').forEach((size, sizeIndex) => {
 		
 		size.classList.add('selected');		
 	});
+});
+
+c('.pizzaInfo--addButton').addEventListener('click', () => {
+	let size = parseInt(c('.pizzaInfo--size.selected').getAttribute('data-key'));
+	let identifier = `${pizzaJson[modalKey].id}@${size}`;
+
+	let key = cart.findIndex((item) => item.identifier == identifier);
+
+	if (key > -1) {
+		cart[key].qt += modalQt;
+	} else {
+		cart.push({
+			identifier,
+			id: pizzaJson[modalKey].id,
+			size,
+			qt: modalQt
+		});
+	}
+
+	closeModal();
 });
