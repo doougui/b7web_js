@@ -13,37 +13,39 @@ pizzaJson.map((item, index) => {
 	pizzaItem.querySelector('.pizza-item--name').innerHTML = item.name;
 	pizzaItem.querySelector('.pizza-item--desc').innerHTML = item.description;
 
-	pizzaItem.querySelector('a').addEventListener('click', (e) => {
-		e.preventDefault();
-		let key = e.target.closest('.pizza-item').getAttribute('data-key');
-		modalQt = 1;
-
-		c('.pizzaBig img').src = pizzaJson[key].img
-		c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
-		c('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
-		c('.pizzaInfo--actualPrice').innerHTML = `R$ ${pizzaJson[key].price.toFixed(2).replace('.', ',')}`;
-		c('.pizzaInfo--size.selected').classList.remove('selected');
-
-		cs('.pizzaInfo--size').forEach((size, sizeIndex) => {
-			if (sizeIndex === 2) {
-				size.classList.add('selected');
-			}
-			size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
-		});
-
-		c('.pizzaInfo--qt').innerHTML = modalQt;
-
-		c('.pizzaWindowArea').style.opacity = 0;
-		c('.pizzaWindowArea').style.display = 'flex';
-		setTimeout(() => {
-			c('.pizzaWindowArea').style.opacity = 1;
-		}, 150);
-	});
+	pizzaItem.querySelector('a').addEventListener('click', openModal);
 
 	c('.pizza-area').append(pizzaItem);
 });
 
 // Eventos do modal
+function openModal(e) {
+	e.preventDefault();
+	let key = e.target.closest('.pizza-item').getAttribute('data-key');
+	modalQt = 1;
+
+	c('.pizzaBig img').src = pizzaJson[key].img
+	c('.pizzaInfo h1').innerHTML = pizzaJson[key].name;
+	c('.pizzaInfo--desc').innerHTML = pizzaJson[key].description;
+	c('.pizzaInfo--actualPrice').innerHTML = `R$ ${pizzaJson[key].price.toFixed(2).replace('.', ',')}`;
+	c('.pizzaInfo--size.selected').classList.remove('selected');
+
+	cs('.pizzaInfo--size').forEach((size, sizeIndex) => {
+		if (sizeIndex === 2) {
+			size.classList.add('selected');
+		}
+		size.querySelector('span').innerHTML = pizzaJson[key].sizes[sizeIndex];
+	});
+
+	c('.pizzaInfo--qt').innerHTML = modalQt;
+
+	c('.pizzaWindowArea').style.opacity = 0;
+	c('.pizzaWindowArea').style.display = 'flex';
+	setTimeout(() => {
+		c('.pizzaWindowArea').style.opacity = 1;
+	}, 150);
+}
+
 function closeModal() {
 	c('.pizzaWindowArea').style.opacity = 0;
 	setTimeout(() => {
