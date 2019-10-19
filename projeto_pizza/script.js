@@ -2,8 +2,8 @@ let cart = [];
 let modalQt = 1;
 let modalKey;
 
-const c = (el) => document.querySelector(el);
-const cs = (el) => document.querySelectorAll(el);
+const c = el => document.querySelector(el);
+const cs = el => document.querySelectorAll(el);
 
 // Listagem das pizzas
 pizzaJson.map((item, index) => {
@@ -56,7 +56,7 @@ function closeModal() {
 	}, 150);
 }
 
-cs('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach((item) => {
+cs('.pizzaInfo--cancelButton, .pizzaInfo--cancelMobileButton').forEach(item => {
 	item.addEventListener('click', closeModal);
 });
 
@@ -83,8 +83,7 @@ cs('.pizzaInfo--size').forEach((size, sizeIndex) => {
 c('.pizzaInfo--addButton').addEventListener('click', () => {
 	let size = parseInt(c('.pizzaInfo--size.selected').getAttribute('data-key'));
 	let identifier = `${pizzaJson[modalKey].id}@${size}`;
-
-	let key = cart.findIndex((item) => item.identifier == identifier);
+	let key = cart.findIndex(item => item.identifier == identifier);
 
 	if (key > -1) {
 		cart[key].qt += modalQt;
@@ -97,5 +96,20 @@ c('.pizzaInfo--addButton').addEventListener('click', () => {
 		});
 	}
 
+	updateCart();
 	closeModal();
 });
+
+function updateCart() {
+	if (cart.length > 0) {
+		c('aside').classList.add('show');
+
+		for (let i in cart) {
+			let pizzaItem = pizzaJson.find(item => item.id == cart[i].id);
+
+			console.log(pizzaItem);
+		}
+	} else {
+		c('aside').classList.remove('show');
+	}
+}
